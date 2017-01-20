@@ -4,4 +4,3 @@
 /protected/config/database.php
 /.git
 /protected/runtime/application.log
-# не закрываю части конфига MySQL базы в папке /protected/config/database.php
