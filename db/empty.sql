@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 20 2017 г., 13:30
+-- Время создания: Янв 20 2017 г., 14:59
 -- Версия сервера: 10.1.13-MariaDB
 -- Версия PHP: 5.6.23
 
@@ -113,6 +113,12 @@ ALTER TABLE `tbl_role`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `tbl_status`
+--
+ALTER TABLE `tbl_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -120,7 +126,8 @@ ALTER TABLE `tbl_user`
   ADD KEY `role_id` (`role_id`),
   ADD KEY `company_id` (`company_id`),
   ADD KEY `post_id` (`post_id`),
-  ADD KEY `by_user_id` (`by_user_id`);
+  ADD KEY `by_user_id` (`by_user_id`),
+  ADD KEY `status_id` (`status_id`);
 
 --
 -- AUTO_INCREMENT для сохранённых таблиц
@@ -142,6 +149,11 @@ ALTER TABLE `tbl_post`
 ALTER TABLE `tbl_role`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT для таблицы `tbl_status`
+--
+ALTER TABLE `tbl_status`
+  MODIFY `id` int(2) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT для таблицы `tbl_user`
 --
 ALTER TABLE `tbl_user`
@@ -157,7 +169,8 @@ ALTER TABLE `tbl_user`
   ADD CONSTRAINT `user_by_user_id` FOREIGN KEY (`by_user_id`) REFERENCES `tbl_user` (`id`),
   ADD CONSTRAINT `user_company_id` FOREIGN KEY (`company_id`) REFERENCES `tbl_company` (`id`),
   ADD CONSTRAINT `user_post_id` FOREIGN KEY (`post_id`) REFERENCES `tbl_post` (`id`),
-  ADD CONSTRAINT `user_role_id` FOREIGN KEY (`role_id`) REFERENCES `tbl_role` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_role_id` FOREIGN KEY (`role_id`) REFERENCES `tbl_role` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_status_id` FOREIGN KEY (`status_id`) REFERENCES `tbl_status` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
