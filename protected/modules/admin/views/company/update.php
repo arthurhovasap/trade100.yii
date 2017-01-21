@@ -3,19 +3,18 @@
 /* @var $model Company */
 
 $this->breadcrumbs=array(
-	'Companies'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Компании'=>array('index'),
+	'Компания'=>array('view','id'=>$model->id),
+	'Обновить',
 );
 
 $this->menu=array(
-	array('label'=>'List Company', 'url'=>array('index')),
-	array('label'=>'Create Company', 'url'=>array('create')),
-	array('label'=>'View Company', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Company', 'url'=>array('admin')),
+	array('label'=>'Создать Компанию', 'url'=>array('create')),
+	array('label'=>'Просмотр Компании', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Список Компаний', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Company <?php echo $model->id; ?></h1>
+<h1>Обновить <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

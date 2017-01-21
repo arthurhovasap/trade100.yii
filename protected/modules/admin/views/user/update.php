@@ -3,19 +3,18 @@
 /* @var $model User */
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
+	'Пользователи'=>array('admin'),
+	'Пользователь'=>array('view','id'=>$model->id),
+	'Обновить',
 );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'View User', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+	array('label'=>'Создать пользователя', 'url'=>array('create')),
+	array('label'=>'Просмотр пользователя', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Список пользователей', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update User <?php echo $model->id; ?></h1>
+<h1>UОбновить пользователя <?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

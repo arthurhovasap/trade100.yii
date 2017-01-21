@@ -3,16 +3,15 @@
 /* @var $model Status */
 
 $this->breadcrumbs=array(
-	'Statuses'=>array('index'),
-	'Create',
+	'Статусы'=>array('admin'),
+	'Создать',
 );
 
 $this->menu=array(
-	array('label'=>'List Status', 'url'=>array('index')),
-	array('label'=>'Manage Status', 'url'=>array('admin')),
+	array('label'=>'Список статусов', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Status</h1>
+<h1>Создать Статус</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

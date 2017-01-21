@@ -11,8 +11,11 @@ class app {
         return time();
     }
     
-    public static function date($format = "Y-m-d H:i:s"){
-        return date($format);
+    public static function date($format = "Y-m-d H:i:s", $seconds = NULL){
+        if ($seconds == NULL)
+            return date($format);
+        else
+            return date($format, $seconds);
     }
     
     public static function secondsDT($dt = NULL){
@@ -37,5 +40,12 @@ class app {
     
     public static function actionID(){
         return Yii::app()->controller->action->id;
+    }
+    
+    public static function arrayToDoubleAssocArray($array){
+        foreach ($array as $key => $value){
+            $arr[] = array('label' => $value, 'value'=>$key);
+        }
+        return $arr;
     }
 }

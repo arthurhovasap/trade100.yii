@@ -28,7 +28,7 @@
  */
 class User extends CActiveRecord
 {
-	/**
+        /**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
@@ -44,11 +44,16 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('firstname, lastname, role_id, company_id, post_id, tel_home, tel_work, email_home, email_work, status_id, created_dt', 'required'),
+			array('firstname, lastname, role_id, company_id, post_id, tel_home, tel_work, email_home, email_work, status_id', 'required'),
 			array('role_id, company_id, post_id, status_id, created_dt, updated_dt, by_user_id', 'numerical', 'integerOnly'=>true),
 			array('firstname, lastname', 'length', 'max'=>50),
 			array('tel_home, tel_work', 'length', 'max'=>20),
 			array('email_home, email_work', 'length', 'max'=>100),
+                        array('email_home, email_work', 'email'),
+                        array('tel_work, tel_home', 'match',
+                                'pattern' => Regex::$phone,
+                                'message' => "Пример: +79261234567, 9261234567, 79261234567, +7 926 123 45 67, 54(926)123-45-67, 123-45-67, 9261234567, 79261234567, (495)1234567, (495) 123 45 67, +374-926-123-45-67, 374 927 1234 234, +374 927 12 12 888, 97 927 12 555 12, 51 927 123 8 123"
+                        ),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, firstname, lastname, role_id, company_id, post_id, tel_home, tel_work, email_home, email_work, status_id, created_dt, updated_dt, by_user_id', 'safe', 'on'=>'search'),
@@ -68,6 +73,7 @@ class User extends CActiveRecord
 			'company' => array(self::BELONGS_TO, 'Company', 'company_id'),
 			'post' => array(self::BELONGS_TO, 'Post', 'post_id'),
 			'role' => array(self::BELONGS_TO, 'Role', 'role_id'),
+                        'status' => array(self::BELONGS_TO, 'Status', 'status_id'),
 		);
 	}
 
@@ -142,4 +148,67 @@ class User extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+        
+        public function userActiveRoles(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            $criteria->join = "RIGHT JOIN ".Table::user()." u ON u.role_id = t.id";
+            return Role::model()->findAll($criteria);
+        }
+        
+        public function userActiveStatuses(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            $criteria->join = "RIGHT JOIN ".Table::user()." u ON u.role_id = t.id";
+            return Status::model()->findAll($criteria);
+        }
+        
+        public function userActivePosts(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            $criteria->join = "RIGHT JOIN ".Table::user()." u ON u.role_id = t.id";
+            return Post::model()->findAll($criteria);
+        }
+        
+        public function userActiveCompanies(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            $criteria->join = "RIGHT JOIN ".Table::user()." u ON u.role_id = t.id";
+            return Company::model()->findAll($criteria);
+        }
+        
+        public function userRoles(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            return Role::model()->findAll($criteria);
+        }
+        
+        public function userStatuses(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            return Status::model()->findAll($criteria);
+        }
+        
+        public function userPosts(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            return Post::model()->findAll($criteria);
+        }
+        
+        public function userCompanies(){
+            $criteria = new CDbCriteria();
+            $criteria->select = "t.id, t.name";
+            return Company::model()->findAll($criteria);
+        }
+        
+        public function beforeSave() {
+            
+            if ($this->isNewRecord) {
+                $this->created_dt = app::secondsDT();
+            }else {
+                $this->updated_dt = app::secondsDT();
+            }
+
+            return parent::beforeSave();
+        }
 }

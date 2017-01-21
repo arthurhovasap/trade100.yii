@@ -1,8 +1,3 @@
-<?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+All Rights Reserved.<br/>
+<?php echo Yii::powered(); ?>

@@ -60,8 +60,8 @@ class Role extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Название',
-			'description' => 'Description',
-			'score' => 'Score',
+			'description' => 'Объяснение',
+			'score' => 'Привилегии',
 		);
 	}
 

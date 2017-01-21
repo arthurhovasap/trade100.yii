@@ -3,19 +3,18 @@
 /* @var $model Status */
 
 $this->breadcrumbs=array(
-	'Statuses'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
+	'Статусы'=>array('admin'),
+	'Статус'=>array('view','id'=>$model->id),
+	'Обновить',
 );
 
 $this->menu=array(
-	array('label'=>'List Status', 'url'=>array('index')),
-	array('label'=>'Create Status', 'url'=>array('create')),
-	array('label'=>'View Status', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Status', 'url'=>array('admin')),
+	array('label'=>'Создать Статус', 'url'=>array('create')),
+	array('label'=>'Посмотреть статус', 'url'=>array('view', 'id'=>$model->id)),
+	array('label'=>'Список статусов', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update Status <?php echo $model->id; ?></h1>
+<h1>Обновить Статус  #<?php echo $model->id; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

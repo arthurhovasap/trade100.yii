@@ -2,6 +2,7 @@
 /* @var $this UserController */
 /* @var $model User */
 /* @var $form CActiveForm */
+echo app::secondsDT();
 ?>
 
 <div class="form">
@@ -12,10 +13,10 @@
 	// controller action is handling ajax validation correctly.
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
-	'enableAjaxValidation'=>false,
+	'enableAjaxValidation'=>true,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Поля с <span class="required">*</span> обязательны для заполнения.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -32,22 +33,22 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'role_id'); ?>
-		<?php echo $form->textField($model,'role_id'); ?>
-		<?php echo $form->error($model,'role_id'); ?>
-	</div>
+                <?php echo $form->labelEx($model,'role_id'); ?>
+                <?php echo $form->dropDownList($model, 'role_id', CHtml::listData($model->userRoles(),'id','name'), array('options' => array($model->role_id=>array('selected'=>true)))); ?>
+                <?php echo $form->error($model,'role_id'); ?>
+        </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'company_id'); ?>
-		<?php echo $form->textField($model,'company_id'); ?>
+		<?php echo $form->dropDownList($model, 'company_id', CHtml::listData($model->userCompanies(),'id','name'), array('options' => array($model->company_id=>array('selected'=>true)))); ?>
 		<?php echo $form->error($model,'company_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'post_id'); ?>
-		<?php echo $form->textField($model,'post_id'); ?>
-		<?php echo $form->error($model,'post_id'); ?>
-	</div>
+                <?php echo $form->labelEx($model,'post_id'); ?>
+                <?php echo $form->dropDownList($model, 'post_id', CHtml::listData($model->userPosts(),'id','name'), array('options' => array($model->post_id=>array('selected'=>true)))); ?>
+                <?php echo $form->error($model,'post_id'); ?>
+        </div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tel_home'); ?>
@@ -74,31 +75,13 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'status_id'); ?>
-		<?php echo $form->textField($model,'status_id'); ?>
-		<?php echo $form->error($model,'status_id'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'created_dt'); ?>
-		<?php echo $form->textField($model,'created_dt'); ?>
-		<?php echo $form->error($model,'created_dt'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'updated_dt'); ?>
-		<?php echo $form->textField($model,'updated_dt'); ?>
-		<?php echo $form->error($model,'updated_dt'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'by_user_id'); ?>
-		<?php echo $form->textField($model,'by_user_id'); ?>
-		<?php echo $form->error($model,'by_user_id'); ?>
-	</div>
+                <?php echo $form->labelEx($model,'status_id'); ?>
+                <?php echo $form->dropDownList($model, 'status_id', CHtml::listData($model->userStatuses(),'id','name'), array('options' => array($model->status_id=>array('selected'=>true)))); ?>
+                <?php echo $form->error($model,'status_id'); ?>
+        </div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

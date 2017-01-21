@@ -3,16 +3,15 @@
 /* @var $model Company */
 
 $this->breadcrumbs=array(
-	'Companies'=>array('index'),
-	'Create',
+	'Компании'=>array('index'),
+	'Создать',
 );
 
 $this->menu=array(
-	array('label'=>'List Company', 'url'=>array('index')),
-	array('label'=>'Manage Company', 'url'=>array('admin')),
+	array('label'=>'Список Компаний', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create Company</h1>
+<h1>Создать Компанию</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>

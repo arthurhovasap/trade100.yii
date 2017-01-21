@@ -3,42 +3,19 @@
 /* @var $model User */
 
 $this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Manage',
+	'Пользователи'=>array('admin'),
+	'Список',
 );
 
 $this->menu=array(
-	array('label'=>'List User', 'url'=>array('index')),
-	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Создать пользователя', 'url'=>array('create')),
 );
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#user-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
 ?>
 
-<h1>Manage Users</h1>
+<h1>Список пользователей</h1>
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
-
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+<p>Вы можете дополнительно ввести оператор сравнения (<, <=,>,> =, <> или =) в начале каждого из значений поиска, чтобы указать, как сравнение должно быть сделано.</p>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=>'user-grid',
@@ -48,18 +25,38 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'id',
 		'firstname',
 		'lastname',
-		'role_id',
-		'company_id',
-		'post_id',
+		array( 
+                    'name' => 'role_id',
+                    'type' => 'raw',
+                    'value' => '$data->role_id==null ? "" : "{$data->role->name}"',
+                    'filter' => CHtml::listData($model->userRoles(), 'id', 'name'),
+                ),
+		array( 
+                    'name' => 'company_id',
+                    'type' => 'raw',
+                    'value' => '$data->company_id==null ? "" : "{$data->company->name}"',
+                    'filter' => CHtml::listData($model->userCompanies(), 'id', 'name'),
+                ),
+		array( 
+                    'name' => 'post_id',
+                    'type' => 'raw',
+                    'value' => '$data->post_id==null ? "" : "{$data->post->name}"',
+                    'filter' => CHtml::listData($model->userPosts(), 'id', 'name'),
+                ),
+            
+                array( 
+                    'name' => 'status_id',
+                    'type' => 'raw',
+                    'value' => '$data->status_id==null ? "" : "{$data->status->name}"',
+                    'filter' => CHtml::listData($model->userStatuses(), 'id', 'name'),
+                ),
 		/*
 		'tel_home',
 		'tel_work',
 		'email_home',
 		'email_work',
-		'status_id',
 		'created_dt',
 		'updated_dt',
-		'by_user_id',
 		*/
 		array(
 			'class'=>'CButtonColumn',
