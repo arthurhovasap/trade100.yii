@@ -48,4 +48,8 @@ class app {
         }
         return $arr;
     }
+    
+    public static function ip(){
+        return CHttpRequest::getUserHostAddress();
+    }
 }

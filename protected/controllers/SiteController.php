@@ -27,9 +27,23 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+		$model=new Subscribe;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Subscribe']))
+		{
+			$model->attributes=$_POST['Subscribe'];
+                        $model->status_id = Status::$active;
+			if($model->save()){
+                            Yii::app()->user->setFlash('subscribe', 'Спасибо за подписку');
+                        }
+		}
+
+		$this->render('index',array(
+			'model'=>$model,
+		));
 	}
 
 	/**

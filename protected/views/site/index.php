@@ -5,6 +5,14 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <h1>Велком <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<?php if(Yii::app()->user->hasFlash('subscribe')): ?>
+    <div class="flash-success">
+            <?php echo Yii::app()->user->getFlash('subscribe'); ?>
+    </div>
+<?php else: ?>
+    <?php $this->renderPartial('_subscribe', array('model'=>$model)); ?>
+<?php endif; ?>
+
 <h2>Ссылки</h2>
 <ol>
     <li>GIT: https://github.com/arthurhovasap/trade100.yii</li>

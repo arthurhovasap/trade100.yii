@@ -6,6 +6,7 @@
                 array('label'=>'Должность', 'url'=>array('/admin/post/admin')),
                 array('label'=>'Компания', 'url'=>array('/admin/company/admin')),
                 array('label'=>'Пользователи', 'url'=>array('/admin/user/admin')),
+                array('label'=>'Подписчики', 'url'=>array('/admin/subscribe/admin')),
                 array('label'=>'Логин', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
                 array('label'=>'Логаут ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
         ),
